@@ -1,8 +1,114 @@
-\section{EMC testing documentation}\label{emc-testing-documentation}
+\documentclass[oneside, a4paper, 11pt]{memoir}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{textcomp}
+\usepackage{siunitx}
+\usepackage[minionint, lf]{MinionPro}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{soul}
+
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage[round]{natbib}
+\usepackage{geometry}
+\usepackage{minted}
+\usepackage[font=small,labelfont=bf]{caption}
+%\usepackage{subcaption}
+%\usepackage{booktabs}
+
+\nouppercaseheads
+
+% Package that provides hyperlinks to (in this case) citations
+\usepackage[pdfauthor={Patrick Camilleri},
+pdftitle={Summary report for the SpiNNaker group},
+pdfsubject={Summary},
+pdfkeywords={summary spinnaker}]{hyperref} % This loads package 'url'
+
+\hypersetup{colorlinks=true,
+	citecolor=Sepia,
+	urlcolor=blue,
+	filecolor=black,
+	linkcolor=black,
+	breaklinks=true}
+\urlstyle{same}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={210mm,297mm},
+	left=35mm,
+	right=30mm,
+	top=30mm,
+	bottom=30mm,
+}
+
+\newenvironment{itmz}{
+	\begin{itemize}
+		\setlength{\itemsep}{0pt}
+		\setlength{\parskip}{0pt}
+	}{\end{itemize}}
+
+\setsecnumdepth{subsection}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{2}
+
+\makeatletter
+\newlength\drop
+\newcommand*{\titleGM}{%
+	\thispagestyle{empty}
+	\begingroup% Gentle Madness
+	\drop = 0.1\textheight
+	\vspace*{\baselineskip}
+	\vfill
+	\hbox{%
+		\hspace*{0.1\textwidth}%
+		\rule{1pt}{\dimexpr\textheight-28pt\relax}%
+		\hspace*{0.05\textwidth}% 
+		\parbox[b]{0.75\textwidth}{%
+			\vbox{%
+				\vspace{\drop}
+				{\Huge\bfseries\raggedright\@title\par}\vskip2.37\baselineskip
+				{\Large\itshape SpiNNaker Group}\\[4\baselineskip]
+				{\Large\bfseries\@author}\\[2\baselineskip]
+				{\large\@date\par}
+				\vspace{0.5\textheight}
+			}% end of vbox
+		}% end of parbox
+	}% end of hbox
+	\vfill
+	%	\cleardoublepage % this clears the page number from the second (empty) title page
+	%	\null % this creates a second blank page (with page number)
+	\endgroup}
+\makeatother
+
+\title{Final Report}
+\author{Patrick Camilleri}
+\date{9$^\text{th}$ February 2016}
+
+% change bibliography line spacing
+\setlength{\bibsep}{5pt}
+
+\begin{document}
+	
+\begin{titlingpage}
+	\titleGM
+\end{titlingpage}
+
+%\maketitle
+\frontmatter
+\tableofcontents
+
+\mainmatter
+\chapterstyle{hangnum}
+	
+\chapter{EMC testing documentation}\label{emc-testing-documentation}
 
 \textbf{Links} http://learnemc.com/introduction-to-emc
 
-\subsection{EMC background}\label{emc-background}
+\section{EMC background}\label{emc-background}
 
 \textbf{Electromagnetic compatibility} (\textbf{EMC}) is the branch of
 electrical engineering concerned with the unintentional generation,
@@ -33,68 +139,59 @@ sources of interference, inhibiting coupling paths and/or hardening the
 potential victims. In practice, many of the engineering techniques used,
 such as grounding and shielding, apply to all three issues.
 
-\subsection{Software description}\label{software-description}
+\section{Software description}\label{software-description}
 
-\section{Power measurement on the SpiNN4
+\chapter{Power measurement on the SpiNN4
 board}\label{power-measurement-on-the-spinn4-board}
 
-\subsection{Hardware used}\label{hardware-used}
+\section{Hardware used}\label{hardware-used}
 
-\subsubsection{ADC Arduino shield}\label{adc-arduino-shield}
+\subsection{ADC Arduino shield}\label{adc-arduino-shield}
 
-\subsubsection{Shunt amplifier circuits}\label{shunt-amplifier-circuits}
+\subsection{Shunt amplifier circuits}\label{shunt-amplifier-circuits}
 
-\includegraphics{https://lh3.googleusercontent.com/7izGFqDQa3kOqovWX3c2nPbZOhT5zpO-8J2_b6FWCSzR_Gd55gu7GIugUi8jaAwS1BrpuQ=s200}
-Shunt amplifier
+\begin{figure}
+	\centering
+	\begin{minipage}{.45\textwidth}
+		\centering
+		\includegraphics[width=0.5\linewidth]{shunt_amp}
+		\caption{Shunt amplifier}
+	\end{minipage}
+	\begin{minipage}{.45\textwidth}
+		\centering
+		\includegraphics[width=0.5\linewidth]{shunt_amp2}
+		\caption{Shunt amplifier}
+	\end{minipage}
+\end{figure}
 
-\includegraphics{https://lh3.googleusercontent.com/lLw3qGgwjhGo6hZ8DHrkl-ya9C_N1Z3O2uiNqdedV3h4bQVoiRa_7sy2nLpjBbwm5UWO6Q=s200}
-Shunt amplifier
+\begin{figure}
+	\centering
+	\includegraphics[width=0.35\linewidth]{shunt_amp_mounted}
+	\caption{Shunt amplifiers mounted on SpiNN4 board}
+\end{figure}
 
-\includegraphics{https://lh3.googleusercontent.com/ciFtScA-Sh6h7DyY__3vllkZBxYeuPN4YwdKTVOXZhl3T-ujDx0UGp85T_k6G-5SvhVxfA=s300}
-Shunt amplifiers mounted on SpiNN4 board
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{shunt_amp_arduino}
+	\caption{SpiNN4 board showing the shunt amplifiers and the ADC Arduino shield}
+\end{figure}
 
-\includegraphics{https://lh3.googleusercontent.com/msSIQWgu1V_ONSZs12Yf98xhnSLv61XmQmKj-TKl25sA0g5owrfCj21V931x3EURm83UoQ=s500}
-SpiNN4 board showing the shunt amplifiers and the ADC Arduino shield
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{arduino_spinn4}
+	\caption{Close-up of the ADC Arduino shield}
+\end{figure}
 
-\includegraphics{https://lh3.googleusercontent.com/8JgsV0bi3ZmOY9fCbFOhBAV0lXHeYw1FmeKOhjtksmhWU8y4HXUNSCPvphFVv5r7NHs0vA=s500}
-Close-up of the ADC Arduino shield
+\section{Software used}\label{software-used}
 
-\subsection{Software used}\label{software-used}
-
-\subsubsection{Arduino Processing
+\subsection{Arduino Processing
 software}\label{arduino-processing-software}
 
-\href{http://processing.org/}{Processing} is an open source language/
-development tool for writing programs in \emph{other}computers. Useful
-when you want those other computers to ``talk'' with an Arduino, for
-instance to display or save some data collected by the Arduino.
+\href{http://processing.org/}{Processing} is an open source language/development tool for writing programs in \emph{other}computers. Useful when you want those other computers to ``talk'' with an Arduino, for instance to display or save some data collected by the Arduino.
 
-\textbf{Processing} is an
-\href{https://en.wikipedia.org/wiki/Open-source_software}{open source}
-\href{https://en.wikipedia.org/wiki/Programming_language}{programming
-language} and
-\href{https://en.wikipedia.org/wiki/Integrated_development_environment}{integrated
-development environment} (IDE) built for the electronic arts,
-\href{https://en.wikipedia.org/wiki/New_media_art}{new media art}, and
-\href{https://en.wikipedia.org/wiki/Visual_design}{visual design}
-communities with the purpose of teaching the fundamentals of
-\href{https://en.wikipedia.org/wiki/Computer_programming}{computer
-programming} in a visual context, and to serve as the foundation for
-electronic sketchbooks. The project was initiated in 2001 by
-\href{https://en.wikipedia.org/wiki/C.E.B._Reas}{Casey Reas} and
-\href{https://en.wikipedia.org/wiki/Benjamin_Fry}{Benjamin Fry}, both
-formerly of the Aesthetics and Computation Group at the
-\href{https://en.wikipedia.org/wiki/MIT_Media_Lab}{MIT Media Lab}. One
-of the stated aims of Processing is to act as a tool to get
-non-programmers started with programming, through the instant
-gratification of visual feedback. The language builds on the
-\href{https://en.wikipedia.org/wiki/Java_(programming_language)}{Java
-language}, but uses a simplified syntax and graphics programming model.
-In 2012, they started the Processing Foundation along with
-\href{https://en.wikipedia.org/wiki/Daniel_Shiffman}{Daniel Shiffman},
-who formally joined as a third project lead.
+\textbf{Processing} is an \href{https://en.wikipedia.org/wiki/Open-source_software}{open source} \href{https://en.wikipedia.org/wiki/Programming_language}{programming language} and \href{https://en.wikipedia.org/wiki/Integrated_development_environment}{integrated development environment} (IDE) built for the electronic arts, \href{https://en.wikipedia.org/wiki/New_media_art}{new media art}, and \href{https://en.wikipedia.org/wiki/Visual_design}{visual design} communities with the purpose of teaching the fundamentals of \href{https://en.wikipedia.org/wiki/Computer_programming}{computer programming} in a visual context, and to serve as the foundation for electronic sketchbooks. The project was initiated in 2001 by \href{https://en.wikipedia.org/wiki/C.E.B._Reas}{Casey Reas} and \href{https://en.wikipedia.org/wiki/Benjamin_Fry}{Benjamin Fry}, both formerly of the Aesthetics and Computation Group at the \href{https://en.wikipedia.org/wiki/MIT_Media_Lab}{MIT Media Lab}. One of the stated aims of Processing is to act as a tool to get non-programmers started with programming, through the instant gratification of visual feedback. The language builds on the \href{https://en.wikipedia.org/wiki/Java_(programming_language)}{Java language}, but uses a simplified syntax and graphics programming model. In 2012, they started the Processing Foundation along with \href{https://en.wikipedia.org/wiki/Daniel_Shiffman}{Daniel Shiffman}, who formally joined as a third project lead.
 
-\textbf{Features}
+\subsubsection{Features}
 
 Processing includes a \emph{sketchbook}, a minimal alternative to an
 \href{https://en.wikipedia.org/wiki/Integrated_development_environment}{integrated
@@ -126,7 +223,7 @@ using standard data types such as:
 (real number), and color (RGB,
 \href{https://en.wikipedia.org/wiki/RGBA_color_space}{ARGB}, hex).
 
-\section{Markov Chain Monte Carlo on
+\chapter{Markov Chain Monte Carlo on
 SpiNNaker}\label{markov-chain-monte-carlo-on-spinnaker}
 
 https://darrenjw.wordpress.com/2010/04/28/mcmc-programming-in-r-python-java-and-c/
@@ -153,7 +250,7 @@ find each of these languages interesting and useful, with different
 strengths and weaknesses, and I find that no one of these languages
 dominates any of the others in all situations.
 
-\subsection{Example}\label{example}
+\section{Example}\label{example}
 
 For the purposes of this post we will focus on Gibbs sampling for a
 simple bivariate distribution defined on the half-plane
@@ -174,7 +271,7 @@ algorithm is very simple and works very efficiently, but for
 illustrative purposes, we will consider generating 20,000 iterations
 with a ``thin'' of 500 iterations.
 
-\subsubsection{C}\label{c}
+\subsection{C}\label{c}
 
 The language I have used most for the development of MCMC algorithms is
 C (usually strict ANSI C). C is fast and efficient, and gives the
@@ -183,7 +280,7 @@ The\href{http://www.gnu.org/software/gsl/}{GSL} is an excellent
 scientific library for C, which includes good random number generation
 facilities. A program for this problem is given below.
 
-\begin{verbatim}
+\begin{minted}[fontfamily=courier, fontsize=\small]{c}
 #include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_rng.h>
@@ -206,7 +303,7 @@ void main()
     printf("%d %f %f\n",i,x,y);
   }
 }
-\end{verbatim}
+\end{minted}
 
 This can be compiled and run (on Linux) with commands like:
 
@@ -215,7 +312,7 @@ gcc -O2 -lgsl -lgslcblas gibbs.c -o gibbs
 time ./gibbs > data.tab
 \end{verbatim}
 
-\textbf{PCG}
+\subsubsection{PCG}
 
 http://www.pcg-random.org/
 
@@ -223,8 +320,11 @@ PCG is a family of simple fast space-efficient statistically good
 algorithms for random number generation. Unlike many general-purpose
 RNGs, they are also hard to predict.
 
-\includegraphics{https://lh3.googleusercontent.com/_jUd0J5vJlEIKPKaLEhj__JXJpugfrL8pkKAutjpmWQi0yu6NQOUy4LiE7JcTU0tlJcaqQ=s700}
-PCG family comparison
+\begin{figure}
+	\centering
+	\includegraphics[width=0.95\linewidth]{pcg}
+	\caption{PCG family comparison}
+\end{figure}
 
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
@@ -252,9 +352,9 @@ used as a sample of the desired distribution. The quality of the sample
 improves as a function of the number of steps.
 
 \begin{figure}[htbp]
-\centering
-\includegraphics{https://lh3.googleusercontent.com/qdgFOWPvEoEfV9_a0yRfnGP6uIdNtq7obhHyWWpp48WSb2ej-r4DhsqeyjrpwxVnIW5L8Q=s500}
-\caption{enter image description here}
+	\centering
+	\includegraphics[width=0.4\linewidth]{metropolis_hastings}
+	\caption{enter image description here}
 \end{figure}
 
 Convergence of the
@@ -265,7 +365,7 @@ orange distribution
 \textbf{Random walk Monte Carlo} methods make up a large subclass of
 MCMC methods.
 
-\subsection{Application domains}\label{application-domains}
+\section{Application domains}\label{application-domains}
 
 \begin{itemize}
 \item
@@ -297,9 +397,9 @@ MCMC methods.
   sampling}.
 \end{itemize}
 
-\subsection{Classification}\label{classification}
+\section{Classification}\label{classification}
 
-\subsubsection{Random walk Monte Carlo
+\subsection{Random walk Monte Carlo
 methods}\label{random-walk-monte-carlo-methods}
 
 \paragraph{Multi-dimensional
@@ -386,133 +486,95 @@ Examples of random walk Monte Carlo methods include the following:
   components/clusters/etc. is automatically inferred from the data.
 \end{itemize}
 
-\section{Calibrating the SpiNNaker temperature
+\chapter{Calibrating the SpiNNaker temperature
 sensors}\label{calibrating-the-spinnaker-temperature-sensors}
 
 \begin{figure}[htbp]
-\centering
-\includegraphics{https://lh3.googleusercontent.com/o9NRlj75RoJSTpS2LiKeDNq1Oijs0ZzPmF6bq0QHhey83qXs2yvxCQa4F3e8XO3vJtYy_A=s700}
-\caption{enter image description here}
+	\centering
+	\includegraphics[width=0.95\linewidth]{spinnaker_temp_graphs}
+	\caption{enter image description here}
 \end{figure}
 
-\section{Event-based camera on cheap smartphone sensors and programmable
+\chapter{Event-based camera on cheap smartphone sensors and programmable
 hardware}\label{event-based-camera-on-cheap-smartphone-sensors-and-programmable-hardware}
 
-\subsection{Camera}\label{camera}
+\section{Camera}\label{camera}
 
-\includegraphics{https://lh3.googleusercontent.com/gG2gAYbSC5kXQN-gpJ4AwolR-f7DfwRPTEwB2Q4abScEDAEqdSaGL0ESBKkoP6nfz9aXnQ=s300}
-OV7670
+\begin{figure}
+	\centering
+	\begin{minipage}{.45\textwidth}
+		\centering
+		\includegraphics[width=0.5\linewidth]{ov7670}
+		\caption{OV7670}
+	\end{minipage}
+	\begin{minipage}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{ov5640}
+		\caption{OV5642}
+	\end{minipage}
+\end{figure}
 
-\includegraphics{https://lh3.googleusercontent.com/SB8xW5e38Cx87is1yodl2YpyQ8Ef-a2peA4RxucaHjZhnfxs6FJ8MZDCJeG4Lh1y_Lmuyw=s300}
-OV5642
+\section{OV7670}\label{ov7670}
 
-\subsection{OV7670}\label{ov7670}
+\subsection{Introduction}\label{introduction}
 
-\subsubsection{Introduction}\label{introduction}
+OV7670 image sensor, small volume, low operating voltage, providing all functions of a single chip of VGA camera and image processor. Through SCCB bus control, the sensor can output the whole frame, sampling, and various resolution 8 bits of data. The product VGA image can reach up to a maximum of 30 frames per second. Users can completely control the image quality, data format and transmission mode. All the process of image processing functions can be through the SCCB programming interface, including gamma curve, white balance, saturation and chroma .
 
-OV7670 image sensor, small volume, low operating voltage, providing all
-functions of a single chip of VGA camera and image processor. Through
-SCCB bus control, the sensor can output the whole frame, sampling, and
-various resolution 8 bits of data. The product VGA image can reach up to
-a maximum of 30 frames per second. Users can completely control the
-image quality, data format and transmission mode. All the process of
-image processing functions can be through the SCCB programming
-interface, including gamma curve, white balance, saturation and chroma .
+OmniVision image sensor has been in application of unique sensor technology, by reducing or eliminating the optical or electronic defect such as fixed pattern noise, tail, floating away, etc., to improve the quality of the image, and get the clear and stable color images.
 
-OmmiVision image sensor has been in application of unique sensor
-technology, by reducing or eliminating the optical or electronic defect
-such as fixed pattern noise, tail, floating away, etc., to improve the
-quality of the image, and get the clear and stable color images.
-
-\textbf{Specifications:}
+\subsubsection{Specifications:}
 
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
-\item
-  Photosensitive array: 640x480
-\item
-  IO Voltage: 2.5 V to 3.0 V (internal LDO for nuclear power 1.8V)
-\item
-  Power operation: 60 mW/15 fps
-\item
-  Sleep: \textless{}20 μA
-\item
-  Temperature Operating: -30 ℃ to 70 ℃
-\item
-  Stable: 0 ℃ to 50 ℃
-\item
-  Output Formats (8): YUV/YCbCr4: 2:2 RGB565/555/444 GRB4: 2:2 Raw RGB
-  Data
-\item
-  Optical size: 1/6 "
-\item
-  FOV: 25 °
-\item
-  Maximum frame rate: 30 fps VGA
-\item
-  Sensitivity: 1.3 V/(Lux-sec)
-\item
-  SNR: 46 dB
-\item
-  Dynamic range: 52 dB
-\item
-  View Mode: Progressive
-\item
-  Electronic Exposure: 1 line to 510 line
-\item
-  Pixel Size: 3.6 μm x 3.6 μm
-\item
-  Dark current: 12 mV / s at 60 ℃
+\item Photosensitive array: 640$\times$480
+\item IO Voltage: \SI{2.5}{\V} to \SI{3.0}{\V} (internal LDO for nuclear power \SI{1.8}{\V})
+\item Power operation: \SI{60}{\mW}/15 fps
+\item Sleep: \SI{20}{\uA}
+\item Temperature Operating: \SI{-30}{\degreeCelsius} to \SI{70}{\degreeCelsius}
+\item Stable: \SI{0}{\degreeCelsius} to \SI{50}{\degreeCelsius}
+\item Output Formats (8): YUV/YCbCr4: 2:2 RGB565/555/444 GRB4: 2:2 Raw RGB Data
+\item Optical size: $1/6\,^{\prime\prime}$
+\item FOV: \SI{25}{\degreeCelsius}
+\item Maximum frame rate: 30 fps VGA
+\item Sensitivity: \SI{1.3}{\V/(lux-sec)}
+\item SNR: \SI{46}{\decibel}
+\item Dynamic range: \SI{52}{\decibel}
+\item View Mode: Progressive
+\item Electronic Exposure: 1 line to 510 line
+\item Pixel Size: \SI{3.6 x 3.6}{\um}
+\item Dark current: \SI{12}{\mV\per\s} at \SI{60}{\degreeCelsius}
 \end{itemize}
 
-\textbf{Features:}
+\subsubsection{Features:}
 
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
-\item
-  High sensitivity suitable for illumination applications
-\item
-  Low voltage suitable for embedded applications
-\item
-  Standard SCCB interface compatible with I2C interface
-\item
-  RawRGB, RGB (GRB4:2:2, RGB565/555/444), YUV (4:2:2) and YCbCr (4:2:2)
-  output format
-\item
-  Supports VGA, CIF, and from a variety of sizes CIF to 40x30
-\item
-  VarioPixel sub-sampling mode
-\item
-  ISP has a compensation function to eliminate noise and dead pixels
-\item
-  Support for image scaling
-\item
-  Compensation for loss of optical lens
-\item
-  50/60Hz automatic detection
-\item
-  Saturation automatically adjust (UV adjustment)
-\item
-  Automatically adjust edge enhancement
-\item
-  Automatically adjust the noise reduction
-\item
-  Automatically affect the control functions include: automatic exposure
-  control, automatic gain control, automatic white balance, automatic
-  elimination of light stripes, automatic black level calibration image
-  quality control including color saturation, hue, gamma, sharpness
+\item High sensitivity suitable for illumination applications
+\item Low voltage suitable for embedded applications
+\item Standard SCCB interface compatible with I2C interface
+\item RawRGB, RGB (GRB4:2:2, RGB565/555/444), YUV (4:2:2) and YCbCr (4:2:2) output format
+\item Supports VGA, CIF, and from a variety of sizes CIF to 40$\times$30
+\item VarioPixel sub-sampling mode
+\item ISP has a compensation function to eliminate noise and dead pixels
+\item Support for image scaling
+\item Compensation for loss of optical lens
+\item 50/\SI{60}{\Hz} automatic detection
+\item Saturation automatically adjust (UV adjustment)
+\item Automatically adjust edge enhancement
+\item Automatically adjust the noise reduction
+\item Automatically affect the control functions include: automatic exposure control, automatic gain control, automatic white balance, automatic elimination of light stripes, automatic black level calibration image quality control including color saturation, hue, gamma, sharpness
 \end{itemize}
 
 Read more:
 http://www.elecfreaks.com/store/ov7670-camera-module-p-705.html\#ixzz3xzHrceGf
 
-\subsection{OV5642}\label{ov5642}
+\section{OV5642}\label{ov5642}
 
-\subsubsection{Introduction}\label{introduction-1}
+\subsection{Introduction}\label{introduction-1}
 
 The OV5642 (color) image sensor is a low voltage, high-performance,
 1/4-inch 5 megapixel CMOS image sensor that provides the full
-functionality of a single chip 5 megapixel (2592x1944) camera using
+functionality of a single chip 5 megapixel (2592$\times$1944) camera using
 OmniBSI™ technology in a small footprint package. It provides
 full-frame, sub-sampled, windowed or arbitrarily scaled 8-bit/10-bit
 images in various formats via the control of the Serial Camera Control
@@ -539,149 +601,104 @@ The OV5642 supports both a digital video parallel port and a serial MIPI
 port. The MIPI and ISP interface can be used for a second camera sensor
 without requiring a dual serial port camera system.
 
-\textbf{Features:}
+\subsubsection{Features:}
 
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
-\item
-  1.4 μm OmniBSI technology
-\item
-  ultra high performance
-\item
-  embedded TrueFocus ISP enabling better denoise, sharpening, gamma
-  correction and colour correction
-\item
-  automatic image control functions:
+\item \SI{1.4}{\um} OmniBSI technology
+\item ultra high performance
+\item embedded TrueFocus ISP enabling better denoise, sharpening, gamma correction and colour correction
+\item automatic image control functions:
 
   \begin{itemize}
   \itemsep1pt\parskip0pt\parsep0pt
-  \item
-    automatic exposure control (AEC)
-  \item
-    automatic white balance (AWB)
-  \item
-    automatic band filter (ABF)
-  \item
-    automatic 50/60 Hz luminance detection
-  \item
-    automatic black level calibration (ABLC)
+  \item automatic exposure control (AEC)
+  \item automatic white balance (AWB)
+  \item automatic band filter (ABF)
+  \item automatic 50/\SI{60}{\Hz} luminance detection
+  \item automatic black level calibration (ABLC)
   \end{itemize}
-\item
-  programmable controls for frame rate, AEC/AGC 16-zone
-  size/position/weight control, mirror and flip, scaling, cropping,
-  windowing, and panning
-\item
-  image quality controls: color saturation, hue, gamma, sharpness (edge
-  enhancement), lens correction, defective pixel canceling, and noise
-  canceling
-\item
-  support for output formats: RAW RGB, RGB565/555/444, CCIR656,
-  YUV422/420, YCbCr422, and compression
-\item
-  support for auto focus control (AFC)
-\item
-  standard serial SCCB interface
-\item
-  MIPI serieal input and output interface
-\item
-  programmable I/O drive capability
-\item
-  support for mechanical shutter, ND filter and IRIS control
-\item
-  built-in 1.5V regulator for core
+\item programmable controls for frame rate, AEC/AGC 16-zone size/position/weight control, mirror and flip, scaling, cropping, windowing, and panning
+\item image quality controls: color saturation, hue, gamma, sharpness (edge enhancement), lens correction, defective pixel canceling, and noise canceling
+\item support for output formats: RAW RGB, RGB565/555/444, CCIR656, YUV422/420, YCbCr422, and compression
+\item support for auto focus control (AFC)
+\item standard serial SCCB interface
+\item MIPI serieal input and output interface
+\item programmable I/O drive capability
+\item support for mechanical shutter, ND filter and IRIS control
+\item built-in \SI{1.5}{\V} regulator for core
 \end{itemize}
 
 \textbf{Specifications:}
 
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
-\item
-  active array size: 2592x1944
-\item
-  power supply:
+\item active array size: 2592$\times$1944
+\item power supply:
 
   \begin{itemize}
   \itemsep1pt\parskip0pt\parsep0pt
-  \item
-    core: 1.5 V +/-5\% (internal regulator)
-  \item
-    analog: 2.6 - 3.0 V
-  \item
-    I/O: 1.71 - 3.0 V
+  \item core: \SI{1.5}{\V} \num{+-5}\% (internal regulator)
+  \item analog: \SI{2.6}{\V} -- \SI{3.0}{\V}
+  \item I/O: \SI{1.71}{\V} -- \SI{3.0}{\V}
   \end{itemize}
-\item
-  power requirements:
+\item power requirements:
 
   \begin{itemize}
   \itemsep1pt\parskip0pt\parsep0pt
-  \item
-    active: 270 mA
-  \item
-    standby: 25 μm
+  \item active: \SI{270}{\mA}
+  \item standby: \SI{25}{\uA}
   \end{itemize}
-\item
-  temperature range:
+\item temperature range:
 
   \begin{itemize}
   \itemsep1pt\parskip0pt\parsep0pt
-  \item
-    operating: -30 ℃ to 70 ℃
-  \item
-    stable image: 0 ℃ to 50 ℃
+  \item operating: \SI{-30}{\degreeCelsius} to \SI{70}{\degreeCelsius}
+  \item stable image: \SI{0}{\degreeCelsius} to \SI{50}{\degreeCelsius}
   \end{itemize}
-\item
-  lens sie: 1/4 "
-\item
-  lens chief ray angle: 24 deg non-linear
-\item
-  input clock frequency: 6-54 MHz
-\item
-  shutter: rolling shutter
-\item
-  maximum image transfer rate:
+\item lens sie: $1/4\,^{\prime\prime}$
+\item lens chief ray angle: 24 deg non-linear
+\item input clock frequency: 6-\SI{54}{\MHz}
+\item shutter: rolling shutter
+\item maximum image transfer rate:
 
   \begin{itemize}
   \itemsep1pt\parskip0pt\parsep0pt
-  \item
-    5 megapixel (2592x1944): 15 fps (and any size scaling down from 5
-    megapixel)
-  \item
-    1080p (1920x1080): 30 fps
-  \item
-    720p (1280x720): 60 fps
-  \item
-    VGA (640x480): 60 fps
-  \item
-    QVGA (320x240): 120 fps
+  \item 5 megapixel (2592$\times$1944): 15 fps (and any size scaling down from 5 megapixel)
+  \item 1080p (1920$\times$1080): 30 fps
+  \item 720p (1280$\times$720): 60 fps
+  \item VGA (640$\times$480): 60 fps
+  \item QVGA (320$\times$240): 120 fps
   \end{itemize}
-\item
-  sensitivity: 680 mV /(lux-sec)
-\item
-  S/N ratio: 36 dB
-\item
-  dynamic range: 68 dB
-\item
-  pixel size: 1.4 μm x 1.4 μm
-\item
-  image area: 3673.6 μm x 2738.4 μm
-\item
-  package dimensions: 6945 μm x 6696 μm
-\item
-  die dimensions: 6960 μm x 6710 μm
+\item sensitivity: \SI{680}{\mV/(lux-s)}
+\item S/N ratio: \SI{36}{\decibel}
+\item dynamic range: \SI{68}{\decibel}
+\item pixel size: \SI{1.4 x 1.4}{\um}
+\item image area: \SI{3673.6 x 2738.4}{\um}
+\item package dimensions: \SI{6945 x 6696}{\um}
+\item die dimensions: \SI{6960 x 6710}{\um}
 \end{itemize}
 
-\subsection{Zybo/Zedboard
-implementation}\label{zybozedboard-implementation}
+\section{Zybo/Zedboard implementation}\label{zybozedboard-implementation}
 
-\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.55\linewidth]{zybo}
+	\caption{Zybo board}
+\end{figure}
 
-\includegraphics{https://lh3.googleusercontent.com/4_R1nekaDU5RTx3HTAkN_BXW72U1XVhs62EIZYSHSbBcqDwzjlzm28QwWL-kuw3iKN5wKw=s500}
-Zybo board
+\begin{figure}
+	\centering
+	\includegraphics[width=0.60\linewidth]{zed}
+	\caption{Zedboard}
+\end{figure}
 
-\includegraphics{https://lh3.googleusercontent.com/EXCOSrRNLwdI28QtsVJ57E05t7irgevXtloe8kQQAJjuORpLZKH1_-3ubWxjDZMmYAAzxQ=s500}
-Zedboard
+\section{Vivado design}\label{vivado-design}
 
-\subsection{Vivado design}\label{vivado-design}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.95\linewidth]{vivado_schematic}
+	\caption{Vivado design}
+\end{figure}
 
-\includegraphics{https://lh3.googleusercontent.com/8Rhvx2sQosSkM0PtcvkuCvC-hLaR8IPjrnmu5DeFwXm1eg8hRlfmT1ZR8mrDY1Yd1wBZpA=s800}
-Vivado design
+\end{document}
