@@ -1,0 +1,687 @@
+\section{EMC testing documentation}\label{emc-testing-documentation}
+
+\textbf{Links} http://learnemc.com/introduction-to-emc
+
+\subsection{EMC background}\label{emc-background}
+
+\textbf{Electromagnetic compatibility} (\textbf{EMC}) is the branch of
+electrical engineering concerned with the unintentional generation,
+propagation and reception of electromagnetic energy which may cause
+unwanted effects such as
+\href{https://en.wikipedia.org/wiki/Electromagnetic_interference}{electromagnetic
+interference} (EMI) or even physical damage in operational equipment.
+The goal of EMC is the correct operation of different equipment in a
+common electromagnetic environment.
+
+EMC pursues two main classes of issue. \textbf{Emission} is the
+generation of electromagnetic energy, whether deliberate or accidental,
+by some source and its release into the environment. EMC studies the
+unwanted emissions and the countermeasures which may be taken in order
+to reduce unwanted emissions. The second class, \textbf{susceptibility}
+is the tendency of electrical equipment, referred to as the victim, to
+malfunction or break down in the presence of unwanted emissions, which
+are known as Radio frequency interference (RFI). \textbf{Immunity} is
+the opposite of susceptibility, being the ability of equipment to
+function correctly in the presence of RFI, with the discipline of
+``hardening'' equipment being known equally as susceptibility or
+immunity. A third class studied is \textbf{coupling}, which is the
+mechanism by which emitted interference reaches the victim.
+
+Interference mitigation and hence electromagnetic compatibility may be
+achieved by addressing any or all of these issues, i.e., quieting the
+sources of interference, inhibiting coupling paths and/or hardening the
+potential victims. In practice, many of the engineering techniques used,
+such as grounding and shielding, apply to all three issues.
+
+\subsection{Software description}\label{software-description}
+
+\section{Power measurement on the SpiNN4
+board}\label{power-measurement-on-the-spinn4-board}
+
+\subsection{Hardware used}\label{hardware-used}
+
+\subsubsection{ADC Arduino shield}\label{adc-arduino-shield}
+
+\subsubsection{Shunt amplifier circuits}\label{shunt-amplifier-circuits}
+
+\includegraphics{https://lh3.googleusercontent.com/7izGFqDQa3kOqovWX3c2nPbZOhT5zpO-8J2_b6FWCSzR_Gd55gu7GIugUi8jaAwS1BrpuQ=s200}
+Shunt amplifier
+
+\includegraphics{https://lh3.googleusercontent.com/lLw3qGgwjhGo6hZ8DHrkl-ya9C_N1Z3O2uiNqdedV3h4bQVoiRa_7sy2nLpjBbwm5UWO6Q=s200}
+Shunt amplifier
+
+\includegraphics{https://lh3.googleusercontent.com/ciFtScA-Sh6h7DyY__3vllkZBxYeuPN4YwdKTVOXZhl3T-ujDx0UGp85T_k6G-5SvhVxfA=s300}
+Shunt amplifiers mounted on SpiNN4 board
+
+\includegraphics{https://lh3.googleusercontent.com/msSIQWgu1V_ONSZs12Yf98xhnSLv61XmQmKj-TKl25sA0g5owrfCj21V931x3EURm83UoQ=s500}
+SpiNN4 board showing the shunt amplifiers and the ADC Arduino shield
+
+\includegraphics{https://lh3.googleusercontent.com/8JgsV0bi3ZmOY9fCbFOhBAV0lXHeYw1FmeKOhjtksmhWU8y4HXUNSCPvphFVv5r7NHs0vA=s500}
+Close-up of the ADC Arduino shield
+
+\subsection{Software used}\label{software-used}
+
+\subsubsection{Arduino Processing
+software}\label{arduino-processing-software}
+
+\href{http://processing.org/}{Processing} is an open source language/
+development tool for writing programs in \emph{other}computers. Useful
+when you want those other computers to ``talk'' with an Arduino, for
+instance to display or save some data collected by the Arduino.
+
+\textbf{Processing} is an
+\href{https://en.wikipedia.org/wiki/Open-source_software}{open source}
+\href{https://en.wikipedia.org/wiki/Programming_language}{programming
+language} and
+\href{https://en.wikipedia.org/wiki/Integrated_development_environment}{integrated
+development environment} (IDE) built for the electronic arts,
+\href{https://en.wikipedia.org/wiki/New_media_art}{new media art}, and
+\href{https://en.wikipedia.org/wiki/Visual_design}{visual design}
+communities with the purpose of teaching the fundamentals of
+\href{https://en.wikipedia.org/wiki/Computer_programming}{computer
+programming} in a visual context, and to serve as the foundation for
+electronic sketchbooks. The project was initiated in 2001 by
+\href{https://en.wikipedia.org/wiki/C.E.B._Reas}{Casey Reas} and
+\href{https://en.wikipedia.org/wiki/Benjamin_Fry}{Benjamin Fry}, both
+formerly of the Aesthetics and Computation Group at the
+\href{https://en.wikipedia.org/wiki/MIT_Media_Lab}{MIT Media Lab}. One
+of the stated aims of Processing is to act as a tool to get
+non-programmers started with programming, through the instant
+gratification of visual feedback. The language builds on the
+\href{https://en.wikipedia.org/wiki/Java_(programming_language)}{Java
+language}, but uses a simplified syntax and graphics programming model.
+In 2012, they started the Processing Foundation along with
+\href{https://en.wikipedia.org/wiki/Daniel_Shiffman}{Daniel Shiffman},
+who formally joined as a third project lead.
+
+\textbf{Features}
+
+Processing includes a \emph{sketchbook}, a minimal alternative to an
+\href{https://en.wikipedia.org/wiki/Integrated_development_environment}{integrated
+development environment} (IDE) for organizing projects.
+
+Every Processing sketch is actually a subclass of the
+\href{http://processing.googlecode.com/svn/trunk/processing/build/javadoc/core/processing/core/PApplet.html}{PApplet}
+\href{https://en.wikipedia.org/wiki/Java_class}{Java class} which
+implements most of the Processing language's features.
+
+When programming in Processing, all additional classes defined will be
+treated as \href{https://en.wikipedia.org/wiki/Inner_class}{inner
+classes} when the code is translated into pure Java before compiling.
+This means that the use of
+\href{https://en.wikipedia.org/wiki/Static_variables}{static variables}
+and \href{https://en.wikipedia.org/wiki/Static_methods}{methods} in
+classes is prohibited unless you explicitly tell Processing that you
+want to code in pure Java mode.
+
+Processing also allows for users to create their own classes within the
+PApplet sketch. This allows for complex
+\href{https://en.wikipedia.org/wiki/Data_types}{data types} that can
+include any number of arguments and avoids the limitations of solely
+using standard data types such as:
+\href{https://en.wikipedia.org/wiki/Integer_(computer_science)}{int}
+(integer),
+\href{https://en.wikipedia.org/wiki/Character_(computing)}{char}
+(character), \href{https://en.wikipedia.org/wiki/Floating_point}{float}
+(real number), and color (RGB,
+\href{https://en.wikipedia.org/wiki/RGBA_color_space}{ARGB}, hex).
+
+\section{Markov Chain Monte Carlo on
+SpiNNaker}\label{markov-chain-monte-carlo-on-spinnaker}
+
+https://darrenjw.wordpress.com/2010/04/28/mcmc-programming-in-r-python-java-and-c/
+
+\href{http://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo}{Markov
+chain Monte Carlo} (MCMC) is a powerful simulation technique for
+exploring high-dimensional probability distributions. It is particularly
+useful for exploring posterior probability distributions that arise in
+Bayesian statistics. Although there are some generic tools (such as
+\href{http://www.mrc-bsu.cam.ac.uk/bugs/}{WinBugs} and
+\href{http://www-fis.iarc.fr/~martyn/software/jags/}{JAGS}) for doing
+MCMC, for non-standard problems it is often desirable to code up MCMC
+algorithms from scratch. It is then natural to wonder what programming
+languages might be good for this purpose. There are hundreds of
+programming languages one could in principle use for MCMC programming,
+but it is necessary to use a language with a good scientific library,
+including good random number generation routines. I have used a large
+number of programming languages over the years, but these days I mostly
+program in \href{http://www.r-project.org/}{R},
+\href{http://www.python.org/}{Python},\href{http://java.sun.com/}{Java}
+or
+\href{http://en.wikipedia.org/wiki/C_\%28programming_language\%29}{C}. I
+find each of these languages interesting and useful, with different
+strengths and weaknesses, and I find that no one of these languages
+dominates any of the others in all situations.
+
+\subsection{Example}\label{example}
+
+For the purposes of this post we will focus on Gibbs sampling for a
+simple bivariate distribution defined on the half-plane
+\emph{x}\textgreater{}0.
+
+\[
+f(x,y) = k x^2 \exp{(-xy^2 - y^2 + 2^y - 4x)}
+\]
+
+The statistical motivation is not important for this post, but this is
+the kind of distribution which arises naturally in Bayesian inference
+for the mean and variance of a normal random sample. Gibbs sampling is a
+simple MCMC scheme which samples in turn from the full-conditional
+distributions. In this case, the full-conditional for \emph{x} is
+\(\Gamma(3, y^2+4)\) and the full-conditional for \emph{y} is
+N(1/(\emph{x}+1), 1/(\emph{x}+1)). The resulting Gibbs sampling
+algorithm is very simple and works very efficiently, but for
+illustrative purposes, we will consider generating 20,000 iterations
+with a ``thin'' of 500 iterations.
+
+\subsubsection{C}\label{c}
+
+The language I have used most for the development of MCMC algorithms is
+C (usually strict ANSI C). C is fast and efficient, and gives the
+programmer lots of control over how computations are carried out.
+The\href{http://www.gnu.org/software/gsl/}{GSL} is an excellent
+scientific library for C, which includes good random number generation
+facilities. A program for this problem is given below.
+
+\begin{verbatim}
+#include <math.h>
+#include <stdlib.h>
+#include <gsl/gsl_rng.h>
+#include <gsl/gsl_randist.h>
+ 
+void main()
+{
+  int N=20000;
+  int thin=500;
+  int i,j;
+  gsl_rng *r = gsl_rng_alloc(gsl_rng_mt19937);
+  double x=0;
+  double y=0;
+  printf("Iter x y\n");
+  for (i=0;i<N;i++) {
+    for (j=0;j<thin;j++) {
+      x=gsl_ran_gamma(r,3.0,1.0/(y*y+4));
+      y=1.0/(x+1)+gsl_ran_gaussian(r,1.0/sqrt(x+1));
+    }
+    printf("%d %f %f\n",i,x,y);
+  }
+}
+\end{verbatim}
+
+This can be compiled and run (on Linux) with commands like:
+
+\begin{verbatim}
+gcc -O2 -lgsl -lgslcblas gibbs.c -o gibbs
+time ./gibbs > data.tab
+\end{verbatim}
+
+\textbf{PCG}
+
+http://www.pcg-random.org/
+
+PCG is a family of simple fast space-efficient statistically good
+algorithms for random number generation. Unlike many general-purpose
+RNGs, they are also hard to predict.
+
+\includegraphics{https://lh3.googleusercontent.com/_jUd0J5vJlEIKPKaLEhj__JXJpugfrL8pkKAutjpmWQi0yu6NQOUy4LiE7JcTU0tlJcaqQ=s700}
+PCG family comparison
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  For the PCG family, arbitrary \emph{k}-dimensional equidistribution
+  (and the huge periods it implies) requires PCG's extended generation
+  scheme.
+\end{itemize}
+
+† ChaCha entry based on
+\href{https://gist.github.com/orlp/32f5d1b631ab092608b1}{an optimized
+C++ implementation} of ChaCha, kindly provided by Orson Peters.
+
+In \href{https://en.wikipedia.org/wiki/Statistics}{statistics},
+\textbf{Markov chain Monte Carlo} (\textbf{MCMC}) methods are a class of
+\href{https://en.wikipedia.org/wiki/Algorithm}{algorithms} for sampling
+from a
+\href{https://en.wikipedia.org/wiki/Probability_distribution}{probability
+distribution} based on constructing a
+\href{https://en.wikipedia.org/wiki/Markov_chain}{Markov chain} that has
+the desired distribution as its
+\href{https://en.wikipedia.org/wiki/Markov_chain\#Steady-state_analysis_and_limiting_distributions}{equilibrium
+distribution}. The state of the chain after a number of steps is then
+used as a sample of the desired distribution. The quality of the sample
+improves as a function of the number of steps.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://lh3.googleusercontent.com/qdgFOWPvEoEfV9_a0yRfnGP6uIdNtq7obhHyWWpp48WSb2ej-r4DhsqeyjrpwxVnIW5L8Q=s500}
+\caption{enter image description here}
+\end{figure}
+
+Convergence of the
+\href{https://en.wikipedia.org/wiki/Metropolis-Hastings_algorithm}{Metropolis-Hastings
+algorithm}. MCMC attempts to approximate the blue distribution with the
+orange distribution
+
+\textbf{Random walk Monte Carlo} methods make up a large subclass of
+MCMC methods.
+
+\subsection{Application domains}\label{application-domains}
+
+\begin{itemize}
+\item
+  MCMC methods are primarily used for calculating
+  \href{https://en.wikipedia.org/wiki/Numerical_analysis}{numerical
+  approximations} of
+  \href{https://en.wikipedia.org/wiki/Multiple_integral}{multi-dimensional
+  integrals}, for example in
+  \href{https://en.wikipedia.org/wiki/Bayesian_statistics}{Bayesian
+  statistics},
+  \href{https://en.wikipedia.org/wiki/Computational_physics}{computational
+  physics},
+  \href{https://en.wikipedia.org/wiki/Computational_biology}{computational
+  biology} and
+  \href{https://en.wikipedia.org/wiki/Computational_linguistics}{computational
+  linguistics}.\href{https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo\#cite_note-1}{{[}1{]}}\href{https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo\#cite_note-2}{{[}2{]}}
+\item
+  In \href{https://en.wikipedia.org/wiki/Bayesian_statistics}{Bayesian
+  statistics}, the recent development of MCMC methods has been a key
+  step in making it possible to compute large
+  \href{https://en.wikipedia.org/wiki/Bayesian_network\#Hierarchical_models}{hierarchical
+  models} that require integrations over hundreds or even thousands of
+  unknown
+  parameters.\href{https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo\#cite_note-3}{{[}3{]}}
+\item
+  They are also used for generating samples that gradually populate the
+  rare failure region in
+  \href{https://en.wikipedia.org/wiki/Rare_event_sampling}{rare event
+  sampling}.
+\end{itemize}
+
+\subsection{Classification}\label{classification}
+
+\subsubsection{Random walk Monte Carlo
+methods}\label{random-walk-monte-carlo-methods}
+
+\paragraph{Multi-dimensional
+integrals}\label{multi-dimensional-integrals}
+
+When an MCMC method is used for approximating a
+\href{https://en.wikipedia.org/wiki/Multiple_integral}{multi-dimensional
+integral}, an
+\href{https://en.wikipedia.org/wiki/Statistical_ensemble}{ensemble} of
+``walkers'' move around randomly. At each point where a walker steps,
+the integrand value at that point is counted towards the integral. The
+walker then may make a number of tentative steps around the area,
+looking for a place with a reasonably high contribution to the integral
+to move into next.
+
+Random walk Monte Carlo methods are a kind of random
+\href{https://en.wikipedia.org/wiki/Computer_simulation}{simulation} or
+\href{https://en.wikipedia.org/wiki/Monte_Carlo_method}{Monte Carlo
+method}. However, whereas the random samples of the integrand used in a
+conventional
+\href{https://en.wikipedia.org/wiki/Monte_Carlo_integration}{Monte Carlo
+integration} are
+\href{https://en.wikipedia.org/wiki/Statistically_independent}{statistically
+independent}, those used in MCMC methods are
+*\href{https://en.wikipedia.org/wiki/Correlation}{correlate*d}. A
+\href{https://en.wikipedia.org/wiki/Markov_chain}{Markov chain} is
+constructed in such a way as to have the integrand as its
+\href{https://en.wikipedia.org/wiki/Markov_chain\#Steady-state_analysis_and_limiting_distributions}{equilibrium
+distribution}.
+
+\paragraph{Examples}\label{examples}
+
+Examples of random walk Monte Carlo methods include the following:
+
+\begin{itemize}
+\item
+  \href{https://en.wikipedia.org/wiki/Metropolis\%E2\%80\%93Hastings_algorithm}{Metropolis--Hastings
+  algorithm}: This method generates a
+  \href{https://en.wikipedia.org/wiki/Random_walk}{random walk} using a
+  proposal density and a method for rejecting some of the proposed
+  moves.
+\item
+  \href{https://en.wikipedia.org/wiki/Gibbs_sampling}{Gibbs sampling}:
+  This method requires all the
+  \href{https://en.wikipedia.org/wiki/Conditional_distribution}{conditional
+  distributions} of the target distribution to be sampled exactly. When
+  drawing from the full-conditional distributions is not straightforward
+  other samplers-within-Gibbs are used (e.g, see
+  \href{https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo\#cite_note-4}{{[}4{]}}\href{https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo\#cite_note-5}{{[}5{]}}\href{https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo\#cite_note-:0-6}{{[}6{]}}).
+  Gibbs sampling is popular partly because it does not require any
+  `tuning'.
+\item
+  \href{https://en.wikipedia.org/wiki/Slice_sampling}{Slice sampling}:
+  This method depends on the principle that one can sample from a
+  distribution by sampling uniformly from the region under the plot of
+  its density function. It alternates uniform sampling in the vertical
+  direction with uniform sampling from the horizontal `slice' defined by
+  the current vertical position.
+\item
+  \href{https://en.wikipedia.org/wiki/Multiple-try_Metropolis}{Multiple-try
+  Metropolis}: This method is a variation of the Metropolis--Hastings
+  algorithm that allows multiple trials at each point. By making it
+  possible to take larger steps at each iteration, it helps address the
+  \href{https://en.wikipedia.org/wiki/Curse_of_dimensionality}{curse of
+  dimensionality}.\href{https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo\#cite_note-7}{{[}7{]}}\href{https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo\#cite_note-8}{{[}8{]}}
+\item
+  \href{https://en.wikipedia.org/wiki/Reversible-jump}{Reversible-jump}:
+  This method is a variant of the Metropolis--Hastings algorithm that
+  allows proposals that change the dimensionality of the
+  space.\href{https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo\#cite_note-9}{{[}9{]}}
+  MCMC methods that change dimensionality have long been used in
+  \href{https://en.wikipedia.org/wiki/Statistical_physics}{statistical
+  physics} applications, where for some problems a distribution that is
+  a \href{https://en.wikipedia.org/wiki/Grand_canonical_ensemble}{grand
+  canonical ensemble} is used (e.g., when the number of molecules in a
+  box is variable). But the reversible-jump variant is useful when doing
+  MCMC or Gibbs sampling over
+  \href{https://en.wikipedia.org/wiki/Nonparametric}{nonparametric}
+  Bayesian models such as those involving the
+  \href{https://en.wikipedia.org/wiki/Dirichlet_process}{Dirichlet
+  process} or
+  \href{https://en.wikipedia.org/wiki/Chinese_restaurant_process}{Chinese
+  restaurant process}, where the number of mixing
+  components/clusters/etc. is automatically inferred from the data.
+\end{itemize}
+
+\section{Calibrating the SpiNNaker temperature
+sensors}\label{calibrating-the-spinnaker-temperature-sensors}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://lh3.googleusercontent.com/o9NRlj75RoJSTpS2LiKeDNq1Oijs0ZzPmF6bq0QHhey83qXs2yvxCQa4F3e8XO3vJtYy_A=s700}
+\caption{enter image description here}
+\end{figure}
+
+\section{Event-based camera on cheap smartphone sensors and programmable
+hardware}\label{event-based-camera-on-cheap-smartphone-sensors-and-programmable-hardware}
+
+\subsection{Camera}\label{camera}
+
+\includegraphics{https://lh3.googleusercontent.com/gG2gAYbSC5kXQN-gpJ4AwolR-f7DfwRPTEwB2Q4abScEDAEqdSaGL0ESBKkoP6nfz9aXnQ=s300}
+OV7670
+
+\includegraphics{https://lh3.googleusercontent.com/SB8xW5e38Cx87is1yodl2YpyQ8Ef-a2peA4RxucaHjZhnfxs6FJ8MZDCJeG4Lh1y_Lmuyw=s300}
+OV5642
+
+\subsection{OV7670}\label{ov7670}
+
+\subsubsection{Introduction}\label{introduction}
+
+OV7670 image sensor, small volume, low operating voltage, providing all
+functions of a single chip of VGA camera and image processor. Through
+SCCB bus control, the sensor can output the whole frame, sampling, and
+various resolution 8 bits of data. The product VGA image can reach up to
+a maximum of 30 frames per second. Users can completely control the
+image quality, data format and transmission mode. All the process of
+image processing functions can be through the SCCB programming
+interface, including gamma curve, white balance, saturation and chroma .
+
+OmmiVision image sensor has been in application of unique sensor
+technology, by reducing or eliminating the optical or electronic defect
+such as fixed pattern noise, tail, floating away, etc., to improve the
+quality of the image, and get the clear and stable color images.
+
+\textbf{Specifications:}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Photosensitive array: 640x480
+\item
+  IO Voltage: 2.5 V to 3.0 V (internal LDO for nuclear power 1.8V)
+\item
+  Power operation: 60 mW/15 fps
+\item
+  Sleep: \textless{}20 μA
+\item
+  Temperature Operating: -30 ℃ to 70 ℃
+\item
+  Stable: 0 ℃ to 50 ℃
+\item
+  Output Formats (8): YUV/YCbCr4: 2:2 RGB565/555/444 GRB4: 2:2 Raw RGB
+  Data
+\item
+  Optical size: 1/6 "
+\item
+  FOV: 25 °
+\item
+  Maximum frame rate: 30 fps VGA
+\item
+  Sensitivity: 1.3 V/(Lux-sec)
+\item
+  SNR: 46 dB
+\item
+  Dynamic range: 52 dB
+\item
+  View Mode: Progressive
+\item
+  Electronic Exposure: 1 line to 510 line
+\item
+  Pixel Size: 3.6 μm x 3.6 μm
+\item
+  Dark current: 12 mV / s at 60 ℃
+\end{itemize}
+
+\textbf{Features:}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  High sensitivity suitable for illumination applications
+\item
+  Low voltage suitable for embedded applications
+\item
+  Standard SCCB interface compatible with I2C interface
+\item
+  RawRGB, RGB (GRB4:2:2, RGB565/555/444), YUV (4:2:2) and YCbCr (4:2:2)
+  output format
+\item
+  Supports VGA, CIF, and from a variety of sizes CIF to 40x30
+\item
+  VarioPixel sub-sampling mode
+\item
+  ISP has a compensation function to eliminate noise and dead pixels
+\item
+  Support for image scaling
+\item
+  Compensation for loss of optical lens
+\item
+  50/60Hz automatic detection
+\item
+  Saturation automatically adjust (UV adjustment)
+\item
+  Automatically adjust edge enhancement
+\item
+  Automatically adjust the noise reduction
+\item
+  Automatically affect the control functions include: automatic exposure
+  control, automatic gain control, automatic white balance, automatic
+  elimination of light stripes, automatic black level calibration image
+  quality control including color saturation, hue, gamma, sharpness
+\end{itemize}
+
+Read more:
+http://www.elecfreaks.com/store/ov7670-camera-module-p-705.html\#ixzz3xzHrceGf
+
+\subsection{OV5642}\label{ov5642}
+
+\subsubsection{Introduction}\label{introduction-1}
+
+The OV5642 (color) image sensor is a low voltage, high-performance,
+1/4-inch 5 megapixel CMOS image sensor that provides the full
+functionality of a single chip 5 megapixel (2592x1944) camera using
+OmniBSI™ technology in a small footprint package. It provides
+full-frame, sub-sampled, windowed or arbitrarily scaled 8-bit/10-bit
+images in various formats via the control of the Serial Camera Control
+Bus (SCCB) interface or MIPI interface. The OV5642 has an image array
+capable of operating at up to 15 frames per second (fps) in 5 megapixel
+resolution with complete user control over image quality, formatting and
+output data transfer. All required image processing functions, including
+exposure control, gamma, white balance, color saturation, hue control,
+defective pixel canceling, noise canceling, etc., are programmable
+through the SCCB interface, MIPI interface or embedded microcontroller.
+The OV5642 also includes a compression engine for increased processing
+power. In addition, Omnivision image sensors use proprietary sensor
+technology to improve image quality by reducing or eliminating common
+lighting/electrical sources of image contamination, such as fixed
+pattern noise, smearing, etc., to produce a clean, fully stable, color
+image. The OV5642 has an embedded microcontroller, which can be combined
+with an internal autofocus engine and programmable general purpose I/O
+modules (GPIO) for external autofocus control. It also provides an
+anti-shake function with an internal anti-shake engine. For
+identification and storage purposes, the OV5642 also includes a one-time
+programmable (OTP) memory. Compared to its predecessor, the OV5642 has
+embedded TrueFocus™ Lite that enables extended depth of field (EDoF).
+The OV5642 supports both a digital video parallel port and a serial MIPI
+port. The MIPI and ISP interface can be used for a second camera sensor
+without requiring a dual serial port camera system.
+
+\textbf{Features:}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  1.4 μm OmniBSI technology
+\item
+  ultra high performance
+\item
+  embedded TrueFocus ISP enabling better denoise, sharpening, gamma
+  correction and colour correction
+\item
+  automatic image control functions:
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    automatic exposure control (AEC)
+  \item
+    automatic white balance (AWB)
+  \item
+    automatic band filter (ABF)
+  \item
+    automatic 50/60 Hz luminance detection
+  \item
+    automatic black level calibration (ABLC)
+  \end{itemize}
+\item
+  programmable controls for frame rate, AEC/AGC 16-zone
+  size/position/weight control, mirror and flip, scaling, cropping,
+  windowing, and panning
+\item
+  image quality controls: color saturation, hue, gamma, sharpness (edge
+  enhancement), lens correction, defective pixel canceling, and noise
+  canceling
+\item
+  support for output formats: RAW RGB, RGB565/555/444, CCIR656,
+  YUV422/420, YCbCr422, and compression
+\item
+  support for auto focus control (AFC)
+\item
+  standard serial SCCB interface
+\item
+  MIPI serieal input and output interface
+\item
+  programmable I/O drive capability
+\item
+  support for mechanical shutter, ND filter and IRIS control
+\item
+  built-in 1.5V regulator for core
+\end{itemize}
+
+\textbf{Specifications:}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  active array size: 2592x1944
+\item
+  power supply:
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    core: 1.5 V +/-5\% (internal regulator)
+  \item
+    analog: 2.6 - 3.0 V
+  \item
+    I/O: 1.71 - 3.0 V
+  \end{itemize}
+\item
+  power requirements:
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    active: 270 mA
+  \item
+    standby: 25 μm
+  \end{itemize}
+\item
+  temperature range:
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    operating: -30 ℃ to 70 ℃
+  \item
+    stable image: 0 ℃ to 50 ℃
+  \end{itemize}
+\item
+  lens sie: 1/4 "
+\item
+  lens chief ray angle: 24 deg non-linear
+\item
+  input clock frequency: 6-54 MHz
+\item
+  shutter: rolling shutter
+\item
+  maximum image transfer rate:
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    5 megapixel (2592x1944): 15 fps (and any size scaling down from 5
+    megapixel)
+  \item
+    1080p (1920x1080): 30 fps
+  \item
+    720p (1280x720): 60 fps
+  \item
+    VGA (640x480): 60 fps
+  \item
+    QVGA (320x240): 120 fps
+  \end{itemize}
+\item
+  sensitivity: 680 mV /(lux-sec)
+\item
+  S/N ratio: 36 dB
+\item
+  dynamic range: 68 dB
+\item
+  pixel size: 1.4 μm x 1.4 μm
+\item
+  image area: 3673.6 μm x 2738.4 μm
+\item
+  package dimensions: 6945 μm x 6696 μm
+\item
+  die dimensions: 6960 μm x 6710 μm
+\end{itemize}
+
+\subsection{Zybo/Zedboard
+implementation}\label{zybozedboard-implementation}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\includegraphics{https://lh3.googleusercontent.com/4_R1nekaDU5RTx3HTAkN_BXW72U1XVhs62EIZYSHSbBcqDwzjlzm28QwWL-kuw3iKN5wKw=s500}
+Zybo board
+
+\includegraphics{https://lh3.googleusercontent.com/EXCOSrRNLwdI28QtsVJ57E05t7irgevXtloe8kQQAJjuORpLZKH1_-3ubWxjDZMmYAAzxQ=s500}
+Zedboard
+
+\subsection{Vivado design}\label{vivado-design}
+
+\includegraphics{https://lh3.googleusercontent.com/8Rhvx2sQosSkM0PtcvkuCvC-hLaR8IPjrnmu5DeFwXm1eg8hRlfmT1ZR8mrDY1Yd1wBZpA=s800}
+Vivado design
