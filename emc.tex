@@ -1,23 +1,20 @@
-\documentclass[oneside, a4paper, 11pt]{memoir}
+\documentclass[a4paper, oneside, 11pt]{memoir}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
 \usepackage{amsmath}
-\usepackage{commath}
-\usepackage{textcomp}
-\usepackage{siunitx}
 \usepackage[minionint, lf]{MinionPro}
-\usepackage[usenames,dvipsnames]{xcolor}
-\usepackage{soul}
+\usepackage{siunitx} % this needs to come after MinionPro, otherwise an error in MinionPro.sty is generated (line 170. You can't use a prefix with \begingroup). Bunch of warnings are also generated
+\usepackage[usenames,dvipsnames]{xcolor} % color names
+\usepackage{soul} % underline, highlight, etc
 
 \usepackage{microtype}
 \usepackage{graphicx}
 \usepackage[round]{natbib}
-\usepackage{geometry}
-\usepackage{minted}
+%\usepackage{showframe} % shows page frame
+\usepackage{minted} % code formatting
 \usepackage[font=small,labelfont=bf]{caption}
-%\usepackage{subcaption}
-%\usepackage{booktabs}
+\usepackage{booktabs} % book tables
 
 \nouppercaseheads
 
@@ -35,21 +32,16 @@ pdfkeywords={summary spinnaker}]{hyperref} % This loads package 'url'
 	breaklinks=true}
 \urlstyle{same}
 
-\usepackage{geometry}
-\geometry{
-	a4paper,
-	total={210mm,297mm},
-	left=35mm,
-	right=30mm,
-	top=30mm,
-	bottom=30mm,
-}
+% Equivalent to setting margins: top=30mm, bottom=30mm, left=35mm, right=30m
+\setulmarginsandblock{3cm}{*}{*}
+\setlrmarginsandblock{4cm}{3cm}{*}
+\checkandfixthelayout
 
-\newenvironment{itmz}{
-	\begin{itemize}
-		\setlength{\itemsep}{0pt}
-		\setlength{\parskip}{0pt}
-	}{\end{itemize}}
+%\newenvironment{itmz}{
+%	\begin{itemize}
+%		\setlength{\itemsep}{0pt}
+%		\setlength{\parskip}{0pt}
+%	}{\end{itemize}}
 
 \setsecnumdepth{subsection}
 \setcounter{secnumdepth}{4}
@@ -681,13 +673,13 @@ without requiring a dual serial port camera system.
 
 \section{Zybo/Zedboard implementation}\label{zybozedboard-implementation}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.55\linewidth]{zybo}
 	\caption{Zybo board}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.60\linewidth]{zed}
 	\caption{Zedboard}
