@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include \PYGZlt{}math.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include \PYGZlt{}stdlib.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include \PYGZlt{}gsl/gsl\PYGZus{}rng.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include \PYGZlt{}gsl/gsl\PYGZus{}randist.h\PYGZgt{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{main}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+  \PYG{k+kt}{int} \PYG{n}{N}\PYG{o}{=}\PYG{l+m+mi}{20000}\PYG{p}{;}
+  \PYG{k+kt}{int} \PYG{n}{thin}\PYG{o}{=}\PYG{l+m+mi}{500}\PYG{p}{;}
+  \PYG{k+kt}{int} \PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{;}
+  \PYG{n}{gsl\PYGZus{}rng} \PYG{o}{*}\PYG{n}{r} \PYG{o}{=} \PYG{n}{gsl\PYGZus{}rng\PYGZus{}alloc}\PYG{p}{(}\PYG{n}{gsl\PYGZus{}rng\PYGZus{}mt19937}\PYG{p}{);}
+  \PYG{k+kt}{double} \PYG{n}{x}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+  \PYG{k+kt}{double} \PYG{n}{y}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+  \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Iter x y}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+  \PYG{k}{for} \PYG{p}{(}\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{N}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{k}{for} \PYG{p}{(}\PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{j}\PYG{o}{\PYGZlt{}}\PYG{n}{thin}\PYG{p}{;}\PYG{n}{j}\PYG{o}{++}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+      \PYG{n}{x}\PYG{o}{=}\PYG{n}{gsl\PYGZus{}ran\PYGZus{}gamma}\PYG{p}{(}\PYG{n}{r}\PYG{p}{,}\PYG{l+m+mf}{3.0}\PYG{p}{,}\PYG{l+m+mf}{1.0}\PYG{o}{/}\PYG{p}{(}\PYG{n}{y}\PYG{o}{*}\PYG{n}{y}\PYG{o}{+}\PYG{l+m+mi}{4}\PYG{p}{));}
+      \PYG{n}{y}\PYG{o}{=}\PYG{l+m+mf}{1.0}\PYG{o}{/}\PYG{p}{(}\PYG{n}{x}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{+}\PYG{n}{gsl\PYGZus{}ran\PYGZus{}gaussian}\PYG{p}{(}\PYG{n}{r}\PYG{p}{,}\PYG{l+m+mf}{1.0}\PYG{o}{/}\PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{x}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{));}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}d \PYGZpc{}f \PYGZpc{}f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{i}\PYG{p}{,}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{);}
+  \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
